@@ -32,16 +32,6 @@ public class Ledger {
        }
     }
 
-
-//    public void writeColumns() {
-//        try {
-//            bufferedWriter.write("date|time|description|vendor|amount\n");
-//            bufferedWriter.flush();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-
     public void display(){
         System.out.println("A) All");
         System.out.println("D) Deposits");
