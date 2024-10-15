@@ -9,15 +9,16 @@ import java.util.Scanner;
 public class Ledger {
 
     private final BufferedWriter bufferedWriter;
-    Scanner input ;
+    private Scanner input ;
 
-    private ArrayList<Transaction> transactions = new ArrayList<>();
+    private static ArrayList<Transaction> transactions; ;
 
     public Ledger() {
        input = new Scanner(System.in);
        try{
            FileWriter fileWriter = new FileWriter("src/main/resources/transactions.csv", true);
            bufferedWriter = new BufferedWriter(fileWriter);
+           transactions = new ArrayList<>();
        } catch (IOException e) {
            throw new RuntimeException(e);
        }
@@ -37,16 +38,19 @@ public class Ledger {
         System.out.println("D) Deposits");
         System.out.println("P) Payments");
         System.out.println("R) Reports");
+        System.out.println("H) Return to home screen");
         String selection = input.nextLine();
         switch (selection){
             case "A":
             case "a":
+                System.out.println("All entries:");
                 for( Transaction t : transactions)
                     System.out.println(t);
                 break;
 
             case "D":
             case "d":
+                System.out.println("Deposits");
                 for( Transaction t : transactions){
                     if( t.getAmount()>=0)
                         System.out.println(t);
@@ -55,11 +59,18 @@ public class Ledger {
 
             case "P":
             case "p":
+                System.out.println("Payments:");
                 for( Transaction t : transactions){
                     if (t.getAmount()<0)
                         System.out.println(t);
                 }
                 break;
+            case "H":
+            case "h":
+                return;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + selection);
         }
     }
 
