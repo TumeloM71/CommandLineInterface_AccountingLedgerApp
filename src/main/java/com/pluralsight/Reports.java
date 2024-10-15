@@ -9,7 +9,7 @@ public class Reports {
     public static void display(ArrayList<Transaction> transactions){
 
         input = new Scanner(System.in);
-        int userInput = Integer.MIN_VALUE;
+        int userInput ;
         while (true) {
             System.out.println("1) Month to Date");
             System.out.println("2) Previous Month");

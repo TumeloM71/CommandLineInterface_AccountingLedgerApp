@@ -11,7 +11,7 @@ public class HomeScreen {
     static Ledger ledger = new Ledger();
     public static void main(String[] args) {
 
-        String selection = "";
+        String selection;
         while (true) {
             System.out.println("D) Add deposit");
             System.out.println("P) Make payment(debit)");

@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class Ledger {
 
-    private BufferedWriter bufferedWriter;
-    private BufferedReader bufferedReader;
+    private final BufferedWriter bufferedWriter;
+    private final BufferedReader bufferedReader;
     private Scanner input ;
 
-    private static ArrayList<Transaction> transactions; ;
+    private static ArrayList<Transaction> transactions;
 
-    public Ledger() {;
+    public Ledger() {
         input = new Scanner(System.in);
        try{
            FileWriter fileWriter = new FileWriter("src/main/resources/transactions.csv", true);
@@ -22,7 +22,7 @@ public class Ledger {
            transactions = new ArrayList<>();
 
            bufferedReader.readLine(); // Skip line with the column headings
-           String line = "";
+           String line ;
            while( (line=bufferedReader.readLine())!=null ){
                transactions.add(new Transaction(line));
            }
