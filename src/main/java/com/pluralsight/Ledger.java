@@ -10,7 +10,6 @@ public class Ledger {
     private BufferedReader bufferedReader;
     private Scanner input ;
 
-
     private static ArrayList<Transaction> transactions; ;
 
     public Ledger() {;

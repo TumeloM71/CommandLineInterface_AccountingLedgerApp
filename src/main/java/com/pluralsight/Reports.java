@@ -139,7 +139,7 @@ public class Reports {
                     filter.add(t);
             }
         }
-        //Remove all elements whcih don't the given filters by calling removeAll()
+        //Remove all elements which don't match the given filters by calling removeAll()
         filteredList.removeAll(filter);
         for( Transaction t : filteredList)
             System.out.println(t);
