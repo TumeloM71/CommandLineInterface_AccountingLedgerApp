@@ -10,17 +10,28 @@ public class Transaction {
     String description,vendor;
     double amount;
 
-    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
-        this.date = date;
-        this.time = time;
+
+    public Transaction(String description, String vendor, double amount) {
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
     }
 
-    public Transaction(String description, String vendor, double amount) {
-        this.date = LocalDate.now();
-        this.time = LocalTime.now();
+    public Transaction (String line){
+        String[] lineArr = line.split("\\|");
+        this.date = Utilities.getDate(lineArr[0]);
+        this.time = Utilities.getTime(lineArr[1]);
+        this.description = lineArr[2];
+        this.vendor = lineArr[3];
+        this.amount = Utilities.getDoubleValue(lineArr[4]);
+
+    }
+
+    public Transaction(LocalDate date, LocalTime time, String description, String vendor, double amount) {
+        this.date = date;
+        this.time = time;
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;

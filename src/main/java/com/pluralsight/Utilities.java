@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 public class Utilities{
@@ -49,30 +50,50 @@ public class Utilities{
         return out;
     }
 
-    public static LocalDate getDate (int year, int month, int day){
+//    public static LocalDate getDate (int year, int month, int day){
+//        LocalDate date;
+//        try{
+//            date = LocalDate.of(year,month,day);
+//        }
+//        catch (DateTimeException e){
+//            throw new IllegalArgumentException( year+":"+month+":"+day+" cannot be converted into a valid date. Exiting program.");
+//        }
+//        return date;
+//    }
+//
+//    public static LocalTime getTime (String input){
+//        LocalTime time;
+//        try{
+//            String[] inputArr = input.split(Pattern.quote(":"));
+//            int hours = Integer.parseInt(inputArr[0]);
+//            int minutes = Integer.parseInt(inputArr[1]);
+//            int seconds = Integer.parseInt(inputArr[2]);
+//            time = LocalTime.of(hours, minutes, seconds);
+//        }
+//        catch (Exception e){
+//            throw new IllegalArgumentException( input+" cannot be converted into a valid time. Exiting program.");
+//        }
+//        return time;
+//    }
+    public static LocalDate getDate (String input) {
         LocalDate date;
         try{
-            date = LocalDate.of(year,month,day);
-        }
-        catch (DateTimeException e){
-            throw new IllegalArgumentException( year+":"+month+":"+day+" cannot be converted into a valid date. Exiting program.");
+            date = LocalDate.parse(input);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException( input+" cannot be converted into a valid date. Exiting program.");
         }
         return date;
     }
-
-    public static LocalTime getTime (String input){
+    public static LocalTime getTime (String input) {
         LocalTime time;
         try{
-            String[] inputArr = input.split(Pattern.quote(":"));
-            int hours = Integer.parseInt(inputArr[0]);
-            int minutes = Integer.parseInt(inputArr[1]);
-            int seconds = Integer.parseInt(inputArr[2]);
-            time = LocalTime.of(hours, minutes, seconds);
+            time = LocalTime.parse(input);
         }
-        catch (Exception e){
+        catch (DateTimeParseException e){
             throw new IllegalArgumentException( input+" cannot be converted into a valid time. Exiting program.");
         }
         return time;
     }
+
 
 }

@@ -1,9 +1,5 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
@@ -12,15 +8,8 @@ public class HomeScreen {
 
     static Scanner input = new Scanner(System.in);
     static Ledger ledger = new Ledger();
-    static FileReader fileReader ;
     public static void main(String[] args) {
-        try {
-            fileReader = new FileReader("src/main/resources/transactions.csv");
-            BufferedReader bufferedReader =new BufferedReader(fileReader);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    //    ledger.writeColumns();
+
         String selection = "";
         while (true) {
             System.out.println("D) Add deposit");
@@ -59,17 +48,11 @@ public class HomeScreen {
         System.out.print("Enter the amount: ");
         double amount = Utilities.getDoubleValue(input.nextLine().trim());
 
-        System.out.print("Enter the year(e.g 2023): ");
-        int year = Utilities.getIntValue(input.nextLine().trim());
-        System.out.println("Enter the month(e.g 12): ");
-        int month = Utilities.getIntValue(input.nextLine().trim());
-        System.out.print("Enter the day(e.g 31): ");
-        int day = Utilities.getIntValue(input.nextLine().trim());
+        System.out.print("Enter the date(YYYY-MM-DD)");
+        LocalDate date = Utilities.getDate(input.nextLine().trim());
 
-        LocalDate date = Utilities.getDate(year,month,day);
-        System.out.print("Enter the time ( HH : mm : ss): ");
-        String timeAsString = input.nextLine().trim();
-        LocalTime time = Utilities.getTime(timeAsString);
+        System.out.print("Enter the time ( HH:mm:ss): ");
+        LocalTime time = Utilities.getTime(input.nextLine().trim());
 
         Transaction t = new Transaction(date,time,description,vendor,amount);
         ledger.add(t);
@@ -83,19 +66,14 @@ public class HomeScreen {
         System.out.println("Enter the amount");
         double amount = Utilities.getDoubleValue(input.nextLine().trim()) * -1;
 
-        System.out.print("Enter the year(e.g 2023): ");
-        int year = Utilities.getIntValue(input.nextLine().trim());
-        System.out.print("Enter the month(e.g 12): ");
-        int month = Utilities.getIntValue(input.nextLine().trim());
-        System.out.print("Enter the day(e.g 31): ");
-        int day = Utilities.getIntValue(input.nextLine().trim());
+        System.out.print("Enter the date(YYYY-MM-DD)");
+        LocalDate date = Utilities.getDate(input.nextLine().trim());
 
-        LocalDate date = Utilities.getDate(year,month,day);
-        System.out.print("Enter the time ( HH : mm : ss): ");
-        String timeAsString = input.nextLine().trim();
-        LocalTime time = Utilities.getTime(timeAsString);
+        System.out.print("Enter the time ( HH:mm:ss): ");
+        LocalTime time = Utilities.getTime(input.nextLine().trim());
 
         Transaction t = new Transaction(date,time,description,vendor,amount);
         ledger.add(t);
+
     }
 }

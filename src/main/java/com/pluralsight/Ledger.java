@@ -1,37 +1,46 @@
 package com.pluralsight;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ledger {
 
-    private final BufferedWriter bufferedWriter;
+    private BufferedWriter bufferedWriter;
+    private BufferedReader bufferedReader;
     private Scanner input ;
+
 
     private static ArrayList<Transaction> transactions; ;
 
-    public Ledger() {
-       input = new Scanner(System.in);
+    public Ledger() {;
+        input = new Scanner(System.in);
        try{
            FileWriter fileWriter = new FileWriter("src/main/resources/transactions.csv", true);
            bufferedWriter = new BufferedWriter(fileWriter);
+           FileReader fileReader = new FileReader("src/main/resources/transactions.csv");
+           bufferedReader = new BufferedReader(fileReader);
            transactions = new ArrayList<>();
+
+           bufferedReader.readLine(); // Skip line with the column headings
+           String line = "";
+           while( (line=bufferedReader.readLine())!=null ){
+               transactions.add(new Transaction(line));
+           }
        } catch (IOException e) {
            throw new RuntimeException(e);
        }
     }
 
-    public void writeColumns() {
-        try {
-            bufferedWriter.write("date|time|description|vendor|amount\n");
-            bufferedWriter.flush();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+//    public void writeColumns() {
+//        try {
+//            bufferedWriter.write("date|time|description|vendor|amount\n");
+//            bufferedWriter.flush();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     public void display(){
         System.out.println("A) All");
@@ -65,6 +74,10 @@ public class Ledger {
                         System.out.println(t);
                 }
                 break;
+            case "R":
+            case "r":
+                Reports.display(transactions);
+                break;
             case "H":
             case "h":
                 return;
@@ -78,7 +91,7 @@ public class Ledger {
         transactions.add(t);
         try {
             bufferedWriter.write(t.getDate().toString() + "|" + t.getTime().toString() + "|" + t.getDescription()
-                    + t.getVendor() + "|" + t.getAmount()+"\n");
+                    +"|" + t.getVendor() + "|" + t.getAmount()+"\n");
             bufferedWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
