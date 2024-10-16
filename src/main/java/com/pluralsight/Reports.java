@@ -101,7 +101,7 @@ public class Reports {
         String description = input.nextLine().trim();
         System.out.print("Vendor: ");
         String vendor = input.nextLine().trim();
-        System.out.println("Amount" );
+        System.out.print("Amount: " );
         String amount = input.nextLine().trim();
 
         //If the user enters a field, add all elements which don't match to the filter list

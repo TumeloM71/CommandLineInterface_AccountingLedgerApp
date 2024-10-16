@@ -57,6 +57,7 @@ public class Ledger {
         switch (selection){
             case "A":
             case "a":
+                transactions.sort(Comparator.comparing(Transaction::getDate));
                 System.out.println("All entries:");
                 for( Transaction t : transactions)
                     System.out.println(t);
