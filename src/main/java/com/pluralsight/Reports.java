@@ -43,7 +43,6 @@ public class Reports {
                     return;
             }
         }
-
     }
 
     public static void monthToDate(ArrayList<Transaction> transactions){
@@ -120,6 +119,14 @@ public class Reports {
         }
 
         if(!description.isEmpty()){
+            /*
+            List.sort() is used again but with a different sort key
+            This is to improve the performance of the for loop because of branch prediction
+            i.e if the computer knows descripitons starts with an E, descriptions from A to D
+            will be skipped by the if statement.
+            This will only make a noticable difference for very large lists, but I wanted to try it
+             */
+            transactions.sort(Comparator.comparing(Transaction::getDescription));
             for( Transaction t : transactions){
                 if( !t.getDescription().equalsIgnoreCase(description))
                     filter.add(t);
@@ -127,6 +134,7 @@ public class Reports {
         }
 
         if(!vendor.isEmpty()){
+            transactions.sort(Comparator.comparing(Transaction::getVendor));
             for( Transaction t : transactions){
                 if( !t.getVendor().equalsIgnoreCase(vendor))
                     filter.add(t);
@@ -134,6 +142,7 @@ public class Reports {
         }
 
         if(!amount.isEmpty()){
+            transactions.sort(Comparator.comparing(Transaction::getAmount));
             for( Transaction t : transactions){
                 if( !(t.getAmount() == Utilities.getDoubleValue(amount)) )
                     filter.add(t);
@@ -141,6 +150,8 @@ public class Reports {
         }
         //Remove all elements which don't match the given filters by calling removeAll()
         filteredList.removeAll(filter);
+        //Filtered ist is sorted by the date like the original unfiltered one
+        filteredList.sort(Comparator.comparing(Transaction::getDate));
         for( Transaction t : filteredList)
             System.out.println(t);
 

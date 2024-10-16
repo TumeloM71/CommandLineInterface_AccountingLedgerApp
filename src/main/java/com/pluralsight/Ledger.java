@@ -2,8 +2,12 @@ package com.pluralsight;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
+//This class handles reading and writing to transactions.csv
+//It also has an ArrayList of all the transactions as an instance variable
 public class Ledger {
 
     private final BufferedWriter bufferedWriter;
@@ -12,6 +16,10 @@ public class Ledger {
 
     private static ArrayList<Transaction> transactions;
 
+    /*
+    In this constructor, the program reads from the csv file and makes Transaction objects for each line
+    It then stores those objects in the ArrayList.
+     */
     public Ledger() {
         input = new Scanner(System.in);
        try{
@@ -26,11 +34,19 @@ public class Ledger {
            while( (line=bufferedReader.readLine())!=null ){
                transactions.add(new Transaction(line));
            }
+           /*
+           Transaction::getDate extracts the date from a Transaction object
+           Comparator.comparing takes in that function and returns a comparator using the date as a sort key
+           i.e it's basically saying "given a list of objects of type X, which part of X do you want sort by?"
+           I decided to use it here so transactions would be sorted by date in the ArrayList
+            */
+           transactions.sort(Comparator.comparing(Transaction::getDate));
        } catch (IOException e) {
            throw new RuntimeException(e);
        }
     }
 
+    //When the user selects L) Ledger in Homescreen, this method is called.
     public void display(){
         System.out.println("A) All");
         System.out.println("D) Deposits");
@@ -76,6 +92,9 @@ public class Ledger {
         }
     }
 
+    /*This method is used when the user wants to add a transaction
+      It adds the transaction to the arraylist and writes it to the .csv file
+     */
     public void add(Transaction t){
         transactions.add(t);
         try {
@@ -86,6 +105,7 @@ public class Ledger {
             throw new RuntimeException(e);
         }
     }
+
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
