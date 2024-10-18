@@ -108,6 +108,7 @@ public class Ledger {
             bufferedWriter.write(t.getDate().toString() + "|" + t.getTime().toString() + "|" + t.getDescription()
                     +"|" + t.getVendor() + "|" + t.getAmount()+"\n");
             bufferedWriter.flush();
+            System.out.println("Transaction added");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
