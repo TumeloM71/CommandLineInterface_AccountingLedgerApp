@@ -12,6 +12,7 @@ public class HomeScreen {
     public static void main(String[] args) {
 
         String selection;
+        //Loop for executing user commands until they exit
         while (true) {
             System.out.println("D) Add deposit");
             System.out.println("P) Make payment(debit)");
@@ -41,6 +42,7 @@ public class HomeScreen {
             }
         }
     }
+    //Add the user's deposit
     public static void  addDeposit(){
         System.out.print("Enter the description: ");
         String description = input.nextLine().trim();
@@ -58,7 +60,7 @@ public class HomeScreen {
         Transaction t = new Transaction(date,time,description,vendor,amount);
         ledger.add(t);
     }
-
+    //Adds the user's payment
     public static void makePayment(){
         System.out.println("Enter the description");
         String description = input.nextLine();

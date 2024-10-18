@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-
+//Class for handling user input with try-catch blocks
 public class Utilities{
 
     public static long getLongValue(String in)
