@@ -67,7 +67,7 @@ public class HomeScreen {
         System.out.println("Enter the amount");
         double amount = Utilities.getDoubleValue(input.nextLine().trim()) * -1;
 
-        System.out.print("Enter the date(YYYY-MM-DD)");
+        System.out.print("Enter the date(YYYY-MM-DD): ");
         LocalDate date = Utilities.getDate(input.nextLine().trim());
 
         System.out.print("Enter the time ( HH:mm:ss): ");

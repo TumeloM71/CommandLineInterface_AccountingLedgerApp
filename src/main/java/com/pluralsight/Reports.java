@@ -130,7 +130,7 @@ public class Reports {
             /*
             List.sort() is used again but with a different sort key
             This is to improve the performance of the for loop because of branch prediction
-            i.e if the computer knows descripitons starts with an E, descriptions from A to D
+            i.e. if the computer knows descripitons starts with an E, descriptions from A to D
             will be skipped by the if statement.
             This will only make a noticable difference for very large lists, but I wanted to try it
              */
