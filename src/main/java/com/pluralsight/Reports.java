@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 public class Reports {
     static Scanner input;
+
+    //This method is called when the user selects 'R) Reports' in the Ledger screen
     public static void display(ArrayList<Transaction> transactions){
 
         input = new Scanner(System.in);
@@ -45,6 +47,7 @@ public class Reports {
         }
     }
 
+    //Lists transactions from the beginning of the current month to the current date
     public static void monthToDate(ArrayList<Transaction> transactions){
         for( Transaction t : transactions){
             if(t.getDate().getMonthValue() == LocalDate.now().getMonthValue())
@@ -52,6 +55,7 @@ public class Reports {
         }
     }
 
+    //Lists transactions from the beginning of the current year to the current date
     public static void yearToDate(ArrayList<Transaction> transactions){
         for( Transaction t : transactions){
             if( t.getDate().getYear() == LocalDate.now().getYear())
@@ -59,6 +63,7 @@ public class Reports {
         }
     }
 
+    //Searches by vendor name
     public static void searchByVendor(ArrayList<Transaction> transactions){
         input = new Scanner(System.in);
         System.out.print("Enter the vendor name: ");
@@ -69,6 +74,7 @@ public class Reports {
         }
     }
 
+    //List all transactions within the last year (365 days)
     public static void previousYear(ArrayList<Transaction> transactions){
         LocalDate now = LocalDate.now();
         LocalDate prev = now.minusYears(1);
@@ -79,6 +85,7 @@ public class Reports {
         }
     }
 
+    //List all transactions within the last month(31 days)
     public static void previousMonth(ArrayList<Transaction> transactions){
         LocalDate now = LocalDate.now();
         LocalDate prev = now.minusMonths(1);
@@ -89,6 +96,7 @@ public class Reports {
         }
     }
 
+    //Brings up the custom search fields and takes in the user input
     public static void customSearch(ArrayList<Transaction> transactions){
         ArrayList<Transaction> filteredList = new ArrayList<>(transactions); //Stored filtered elements
         ArrayList<Transaction> filter = new ArrayList<>(); //Stores elements removed by filters

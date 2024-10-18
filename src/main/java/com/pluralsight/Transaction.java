@@ -10,15 +10,7 @@ public class Transaction {
     String description,vendor;
     double amount;
 
-
-    public Transaction(String description, String vendor, double amount) {
-        this.date = LocalDate.now();
-        this.time = LocalTime.now();
-        this.description = description;
-        this.vendor = vendor;
-        this.amount = amount;
-    }
-
+    //Construct a Transaction instance from a line in the .csv file
     public Transaction (String line){
         String[] lineArr = line.split("\\|");
         this.date = Utilities.getDate(lineArr[0]);

@@ -19,6 +19,8 @@ public class Ledger {
     /*
     In this constructor, the program reads from the csv file and makes Transaction objects for each line
     It then stores those objects in the ArrayList.
+    If I were to delete something from the .csv file, the constructor reads the updated file
+    when making a new instance
      */
     public Ledger() {
         input = new Scanner(System.in);
@@ -46,13 +48,13 @@ public class Ledger {
        }
     }
 
-    //When the user selects L) Ledger in Homescreen, this method is called.
+    //When the user selects 'L) Ledger' in Homescreen, this method is called.
     public void display(){
-        System.out.println("A) All");
-        System.out.println("D) Deposits");
-        System.out.println("P) Payments");
-        System.out.println("R) Reports");
-        System.out.println("H) Return to home screen");
+        System.out.println("A) All");   //List all entries
+        System.out.println("D) Deposits"); //List deposits only
+        System.out.println("P) Payments"); // List payments only
+        System.out.println("R) Reports"); // Brings up the reports screen
+        System.out.println("H) Return to home screen"); //Returns to the previous screen
         String selection = input.nextLine();
         switch (selection){
             case "A":
@@ -63,8 +65,10 @@ public class Ledger {
                     System.out.println(t);
                 break;
 
+            //Amount is a positive number for a deposit
             case "D":
             case "d":
+                transactions.sort(Comparator.comparing(Transaction::getDate));
                 System.out.println("Deposits");
                 for( Transaction t : transactions){
                     if( t.getAmount()>=0)
@@ -72,8 +76,10 @@ public class Ledger {
                 }
                 break;
 
+            //Amount is a negative number for a deposit
             case "P":
             case "p":
+                transactions.sort(Comparator.comparing(Transaction::getDate));
                 System.out.println("Payments:");
                 for( Transaction t : transactions){
                     if (t.getAmount()<0)
