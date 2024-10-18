@@ -50,7 +50,7 @@ public class Reports {
     //Lists transactions from the beginning of the current month to the current date
     public static void monthToDate(ArrayList<Transaction> transactions){
         for( Transaction t : transactions){
-            if(t.getDate().getMonthValue() == LocalDate.now().getMonthValue())
+            if(t.getDate().getMonthValue() == LocalDate.now().getMonthValue() && t.getDate().getYear() == LocalDate.now().getYear())
                 System.out.println(t);
         }
     }
