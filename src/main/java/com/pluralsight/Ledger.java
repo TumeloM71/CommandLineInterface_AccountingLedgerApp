@@ -42,6 +42,7 @@ public class Ledger {
            i.e it's basically saying "given a list of objects of type X, which part of X do you want sort by?"
            I decided to use it here so transactions would be sorted by date in the ArrayList
             */
+           bufferedReader.close();
            transactions.sort(Comparator.comparing(Transaction::getDate));
        } catch (IOException e) {
            throw new RuntimeException(e);
